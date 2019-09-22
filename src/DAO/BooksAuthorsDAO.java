@@ -1,4 +1,7 @@
 package DAO;
-public class BooksAuthorsDAO {
+
+
+public class BooksAuthorsDAO extends DAO{
+    
     
 }

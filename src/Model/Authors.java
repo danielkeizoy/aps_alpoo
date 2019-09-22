@@ -1,5 +1,5 @@
 package Model;
-public class AuthorsModel {
+public class Authors {
 
     private int authorId;
     private String nameAuthor;
