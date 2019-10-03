@@ -11,7 +11,7 @@ public class AuthorsDAO extends DAO {
     
     public void saveAuthor(Authors anAuthor) throws SQLException{
         
-        String insert = "INSERT INTO authors (author_id, name, fname) VALUES (?,?,?)";
+        String insert = "INSERT INTO authors (author_id,  name, fname) VALUES (?,?,?)";
         save(insert, anAuthor.getAuthorId(), anAuthor.getNameAuthor(), anAuthor.getfNameAuthor());
         
     }
