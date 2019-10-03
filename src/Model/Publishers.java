@@ -1,7 +1,7 @@
 package Model;
 public class Publishers {
     
-    private int publisherId;
+    private Integer publisherId;
     private String namePublisher;
     private String url;
 
@@ -9,7 +9,7 @@ public class Publishers {
         return publisherId;
     }
 
-    public void setPublisherId(int publisherId) {
+    public void setPublisherId(Integer publisherId) {
         this.publisherId = publisherId;
     }
 

@@ -4,8 +4,8 @@ public class Books {
     
     private String title;
     private String isbn;
-    private int publisherId;
-    private double price;
+    private Integer publisherId;
+    private Double price;
 
     public String getTitle() {
         return title;
@@ -27,7 +27,7 @@ public class Books {
         return publisherId;
     }
 
-    public void setPublisherId(int publisherId) {
+    public void setPublisherId(Integer publisherId) {
         this.publisherId = publisherId;
     }
 
@@ -35,7 +35,7 @@ public class Books {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
     

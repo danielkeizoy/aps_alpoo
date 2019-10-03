@@ -12,19 +12,19 @@ public class BooksDAO extends DAO {
 
     public void saveBook(Books aBook) throws SQLException {
         
-        String insert = "INSERT INTO books (title, isbn, publisher_id, price) VALUES (?,?,?,?)";
-        save(insert, aBook.getTitle(), aBook.getIsbn(), aBook.getPublisherId(), aBook.getPrice());
+        String insert = "INSERT INTO books (title, isbn, price) VALUES (?,?,?)";
+        save(insert, aBook.getTitle(), aBook.getIsbn(), aBook.getPrice());
     
     }
     
     public void updateBook(Books aBook) throws SQLException{
         
-        String update = "UPDATE books " + "SET title = ?, publisher_id = ?, price = ? " +
+        String update = "UPDATE books " + "SET title = ?, price = ? " +
                 "WHERE isbn = ?";
-        update(update, aBook.getTitle(), aBook.getPublisherId(), aBook.getPrice(), aBook.getIsbn());
+        update(update, aBook.getTitle(), aBook.getPrice(), aBook.getIsbn());
     }
     
-    public void deleteBook(int isbn) throws SQLException{
+    public void deleteBook(String isbn) throws SQLException{
         
         String delete = "DELETE FROM books WHERE isbn = ?";
         
