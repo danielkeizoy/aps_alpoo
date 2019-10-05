@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import DAO.BooksDAO;
 import Model.Books;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,9 +29,8 @@ public class BooksController {
     public BooksController() {
         this.principal = new FrmBooks();
         this.booksDao = new BooksDAO();
-        principal.buscaComportamento(new ComportamentoBtnSearch());
-        //TODO keylistener enter
-//        principal.buscaEnter(new ComportamentoBtnSearch());
+        principal.buscaComportamento(new ComportamentoBtnSearch());      
+        principal.buscaEnter(new BotaoEnter());
     }
 
     public class ComportamentoBtnSearch implements ActionListener {       
@@ -38,6 +39,7 @@ public class BooksController {
         public void actionPerformed(ActionEvent ae) {
             String titulo = principal.getTitle();
             List<Books> searchResult = null;
+            System.out.println("TESTE PROCUROU click!");
             try {
                 searchResult = booksDao.findByTitle(titulo);
             } catch (SQLException ex) {
@@ -45,6 +47,34 @@ public class BooksController {
             }
             
             principal.showBooks(searchResult);
+        }
+    }
+    public class BotaoEnter implements KeyListener {        
+
+        @Override
+        public void keyTyped(KeyEvent ke) {
+            if(ke.getKeyCode()== KeyEvent.VK_ENTER){
+                String titulo = principal.getTitle();
+            List<Books> searchResult = null;
+                System.out.println("TESTE PROCUROU enter!");
+            try {
+                searchResult = booksDao.findByTitle(titulo);
+            } catch (SQLException ex) {
+                Logger.getLogger(BooksController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            principal.showBooks(searchResult);
+            }
+        }
+
+        @Override
+        public void keyPressed(KeyEvent ke) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void keyReleased(KeyEvent ke) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
 

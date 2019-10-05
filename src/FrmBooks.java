@@ -10,6 +10,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashSet;
 import java.util.List;
@@ -130,7 +131,7 @@ public class FrmBooks extends JFrame {
         panelSearch.add(txtSearchAuthor);
         panelSearch.add(txtSearchPublisher);
         panelFilter.add(panelSearch);
-        //panelSearch.setBackground(Color.blue);
+//        panelSearch.setBackground(Color.pink);
 
         
         JPanel panelBtn = new JPanel();
@@ -384,15 +385,12 @@ public class FrmBooks extends JFrame {
     }
 
     public void buscaComportamento(BooksController.ComportamentoBtnSearch comportamentoBtnSearch) {
-        btnSearch.addActionListener(comportamentoBtnSearch);
+        btnSearch.addActionListener(comportamentoBtnSearch);       
     }
 
-    //TODO
-//    public void buscaEnter implements KeyListener(BooksController.ComportamentoBtnSearch comportamentoBtnSearch) {
-//        KeyListener kl;
-//        
-//        txtSearchBook.addKeyListener(kl);
-//    }
+    public void buscaEnter(BooksController.BotaoEnter botaoEnter) {
+        txtSearchBook.addKeyListener(botaoEnter);
+    }
     
     
     
