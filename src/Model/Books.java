@@ -2,10 +2,11 @@ package Model;
 
 public class Books {
     
-    private String title;
+    public String title;
     private String isbn;
-    private Integer publisherId;
-    private Double price;
+    private int publisherId;
+    public Publishers publisher;
+    private double price;
 
     public String getTitle() {
         return title;
@@ -27,7 +28,7 @@ public class Books {
         return publisherId;
     }
 
-    public void setPublisherId(Integer publisherId) {
+    public void setPublisherId(int publisherId) {
         this.publisherId = publisherId;
     }
 
@@ -35,7 +36,7 @@ public class Books {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
     

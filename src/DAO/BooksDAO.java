@@ -31,33 +31,35 @@ public class BooksDAO extends DAO {
         delete(delete, isbn);
     }
     
-    public List findBooks() throws SQLException{
+//    public List findBooks() throws SQLException{
+//        
+//        List books = new ArrayList();
+//        
+//        String select = "SELECT * FROM books";
+//        
+//        PreparedStatement stmt = getConnection().prepareStatement(select);
+//        
+//        ResultSet rs = stmt.executeQuery();
+//        
+//        while (rs.next()){
+//            Books book = new Books();
+//            book.setPublisherId(rs.getInt("publisher_id"));
+//            book.setTitle(rs.getString("title"));
+//            book.setIsbn(rs.getString("isbn"));
+//            book.setPrice(rs.getDouble("price"));
+//            books.add(book);
+//        }
+//        
+//        rs.close();
+//        stmt.close();
+//        getConnection().close();
+//        
+//        return books;
+//    }
+//    
+    public List findByTitle (String aTitle) throws SQLException{
         
         List books = new ArrayList();
-        
-        String select = "SELECT * FROM books";
-        
-        PreparedStatement stmt = getConnection().prepareStatement(select);
-        
-        ResultSet rs = stmt.executeQuery();
-        
-        while (rs.next()){
-            Books book = new Books();
-            book.setPublisherId(rs.getInt("publisher_id"));
-            book.setTitle(rs.getString("title"));
-            book.setIsbn(rs.getString("isbn"));
-            book.setPrice(rs.getDouble("price"));
-            books.add(book);
-        }
-        
-        rs.close();
-        stmt.close();
-        getConnection().close();
-        
-        return books;
-    }
-    
-    public Books findByTitle (String aTitle) throws SQLException{
         
         String select = "SELECT * FROM books WHERE title = ?";
         Books book = null;
@@ -74,6 +76,7 @@ public class BooksDAO extends DAO {
             book.setTitle(rs.getString("title"));
             book.setIsbn(rs.getString("isbn"));
             book.setPrice(rs.getDouble("price"));
+            books.add(book);
             
         }
         
@@ -81,6 +84,6 @@ public class BooksDAO extends DAO {
         stmt.close();
         getConnection().close();
         
-        return book;
+        return books;
     }
 }

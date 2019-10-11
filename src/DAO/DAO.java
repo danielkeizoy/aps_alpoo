@@ -5,10 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-/**
- *
- * @author vitor
- */
+
 public abstract class DAO {
     
     private Connection connection;
