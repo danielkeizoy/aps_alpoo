@@ -12,8 +12,8 @@ public class PublishersDAO extends DAO {
     
     public void savePublisher(Publishers aPublisher) throws SQLException{
         
-        String insert = "INSERT INTO publishers (publisher_id, name, url) VALUES (?,?,?)";
-        save(insert, aPublisher.getPublisherId(), aPublisher.getNamePublisher(), aPublisher.getUrl());
+        String insert = "INSERT INTO publishers (name, url) VALUES (?,?)";
+        save(insert, aPublisher.getNamePublisher(), aPublisher.getUrl());
         
     }
     
@@ -24,7 +24,7 @@ public class PublishersDAO extends DAO {
         update(update, aPublisher.getNamePublisher(), aPublisher.getUrl(), aPublisher.getPublisherId());
     }
     
-    public void deletePublisher(int id) throws SQLException{
+    public void deletePublisher(Integer id) throws SQLException{
         
         String delete = "DELETE FROM publisher WHERE publisher_id = ?";
         

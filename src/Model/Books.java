@@ -2,9 +2,10 @@ package Model;
 
 public class Books {
     
-    private String title;
+    public String title;
     private String isbn;
     private int publisherId;
+    public Publishers publisher;
     private double price;
 
     public String getTitle() {

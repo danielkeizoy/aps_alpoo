@@ -2,13 +2,18 @@
 package View;
 
 
+import Controller.BooksController;
+import Model.Books;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.HashSet;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import static javax.swing.GroupLayout.Alignment.BASELINE;
@@ -126,7 +131,7 @@ public class FrmBooks extends JFrame {
         panelSearch.add(txtSearchAuthor);
         panelSearch.add(txtSearchPublisher);
         panelFilter.add(panelSearch);
-        //panelSearch.setBackground(Color.blue);
+//        panelSearch.setBackground(Color.pink);
 
         
         JPanel panelBtn = new JPanel();
@@ -364,6 +369,30 @@ public class FrmBooks extends JFrame {
         
                 
     }
+    
+    public String getTitle(String title){
+        return txtSearchBook.getText();
+    }
+    
+    public void showBooks(List <Books> resultado){
+        dtm.setNumRows(0);
+        for(Books book: resultado){
+            Object[] data = new Object[2];
+            data[0] = book.title;
+            data[1] = book.publisher.namePublisher;
+            dtm.addRow(data);
+        }
+    }
+
+    public void buscaComportamento(BooksController.ComportamentoBtnSearch comportamentoBtnSearch) {
+        btnSearch.addActionListener(comportamentoBtnSearch);       
+    }
+
+    public void buscaEnter(BooksController.BotaoEnter botaoEnter) {
+        txtSearchBook.addKeyListener(botaoEnter);
+    }
+    
+    
     
     
     

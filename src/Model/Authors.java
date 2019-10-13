@@ -1,7 +1,7 @@
 package Model;
 public class Authors {
 
-    private int authorId;
+    private Integer authorId;
     private String nameAuthor;
     private String fNameAuthor;
     
@@ -9,7 +9,7 @@ public class Authors {
         return authorId;
     }
 
-    public void setAuthorId(int authorId) {
+    public void setAuthorId(Integer authorId) {
         this.authorId = authorId;
     }
 

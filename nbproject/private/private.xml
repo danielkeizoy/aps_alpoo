@@ -5,6 +5,11 @@
         <group>
             <file>file:/C:/Users/kivia/Google%20Drive/UNIP_KIVIA/4SEMESTRE/aps_alpoo/src/View/FrmBooks.java</file>
             <file>file:/C:/Users/kivia/Google%20Drive/UNIP_KIVIA/4SEMESTRE/aps_alpoo/src/DAO/AuthorsDAO.java</file>
+            <file>file:/home/vitor/NetBeansProjects/aps_alpoo/src/DAO/BooksDAO.java</file>
+            <file>file:/home/vitor/NetBeansProjects/aps_alpoo/src/Controller/BooksController.java</file>
+            <file>file:/home/vitor/NetBeansProjects/aps_alpoo/src/View/FrmBooks.java</file>
+            <file>file:/home/vitor/NetBeansProjects/aps_alpoo/src/DAO/DBConnection.java</file>
+            <file>file:/home/vitor/NetBeansProjects/aps_alpoo/src/DAO/DAO.java</file>
         </group>
     </open-files>
 </project-private>
