@@ -10,6 +10,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashSet;
@@ -76,7 +77,7 @@ public class FrmBooks extends JFrame {
     
     public static void main(String[] args) {
         
-        new FrmBooks();
+        new Controller.BooksController();
         
     }
     public FrmBooks(){
@@ -145,8 +146,8 @@ public class FrmBooks extends JFrame {
         
         
         //Tabela
-        Object[] colNames = {"Livro", "Editora"};
-        Object[][]data = new Object[0][2];
+        Object[] colNames = {"isbn", "title","editora"};
+        Object[][]data = new Object[0][3];
         dtm = new DefaultTableModel(data, colNames);
         JTable table = new JTable(dtm);
         JScrollPane jScrollPane1 = new JScrollPane(table);
@@ -370,22 +371,27 @@ public class FrmBooks extends JFrame {
                 
     }
     
-    public String getTitle(String title){
+    public String getTitle(){
         return txtSearchBook.getText();
     }
     
     public void showBooks(List <Books> resultado){
         dtm.setNumRows(0);
         for(Books book: resultado){
-            Object[] data = new Object[2];
-            data[0] = book.title;
-            data[1] = book.publisher.namePublisher;
+            Object[] data = new Object[3];
+            data[0] = book.isbn;
+            data[1] = book.title;
+            data[2] = book.publisher.namePublisher;
             dtm.addRow(data);
         }
     }
-
-    public void buscaComportamento(BooksController.ComportamentoBtnSearch comportamentoBtnSearch) {
+    
+    /*public void buscaComportamento(BooksController.ComportamentoBtnSearch comportamentoBtnSearch) {
         btnSearch.addActionListener(comportamentoBtnSearch);       
+    }*/
+
+    public void buscaComportamento(ActionListener al) {
+        btnSearch.addActionListener(al);       
     }
 
     public void buscaEnter(BooksController.BotaoEnter botaoEnter) {

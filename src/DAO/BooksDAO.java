@@ -1,6 +1,8 @@
 package DAO;
 
 import Model.Books;
+import Model.Publishers;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -57,33 +59,45 @@ public class BooksDAO extends DAO {
 //        return books;
 //    }
 //    
-    public List findByTitle (String aTitle) throws SQLException{
+    public List<Books> findByTitle (String aTitle){
         
-        List books = new ArrayList();
+        List <Books> books = new ArrayList();
+        try(
+    
+        Connection c = DBConnection.getConnection())
+        {
         
-        String select = "SELECT * FROM books WHERE title = ?";
-        Books book = null;
-        PreparedStatement stmt = getConnection().prepareStatement(select);
+        String select = "SELECT books.isbn, books.title, publishers.name FROM books INNER JOIN publishers ON books.publisher_id = publishers.publisher_id  "
+					+ " WHERE LOWER(books.title) LIKE LOWER(?) ";
         
-        stmt.setString(1, aTitle);
         
-        ResultSet rs = stmt.executeQuery();
+        // Books book = null;
+        PreparedStatement pstm = c.prepareStatement(select);
+        
+        pstm.setString(1, "%" + aTitle + "%");
+        
+        ResultSet rs = pstm.executeQuery();
         
         while (rs.next()){
             
-            book = new Books();
-            book.setPublisherId(rs.getInt("publisher_id"));
+            Books book = new Books();
+            //book.setPublisherId(rs.getInt("publisher_id"));
             book.setTitle(rs.getString("title"));
             book.setIsbn(rs.getString("isbn"));
-            book.setPrice(rs.getDouble("price"));
+            //book.setPrice(rs.getDouble("price"));
+            book.publisher = new Publishers();
+            book.publisher.setNamePublisher(rs.getString("name"));
             books.add(book);
             
         }
         
         rs.close();
-        stmt.close();
+        pstm.close();
         getConnection().close();
+        }catch(SQLException e) {
+            e.printStackTrace();
         
+        }
         return books;
     }
 }

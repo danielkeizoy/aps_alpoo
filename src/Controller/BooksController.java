@@ -4,12 +4,14 @@ package Controller;
 import DAO.BooksDAO;
 import Model.Books;
 import View.FrmBooks;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +22,7 @@ public class BooksController {
     
     FrmBooks principal;
     BooksDAO booksDao;
+    
      public BooksController() {
         this.principal = new FrmBooks();
         this.booksDao = new BooksDAO();
@@ -31,16 +34,25 @@ public class BooksController {
                 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            String titulo = principal.getTitle();
-            List<Books> searchResult = null;
             System.out.println("TESTE PROCUROU click!");
+            String titulo = principal.getTitle();
+            List<Books> books;
+            books = booksDao.findByTitle(titulo);
+            
+            
+            
+            
+             principal.showBooks(books);
+            
+            
+            /*
             try {
                 searchResult = booksDao.findByTitle(titulo);
             } catch (SQLException ex) {
                 Logger.getLogger(BooksController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }*/
             
-            principal.showBooks(searchResult);
+           
         }
     }
     public class BotaoEnter implements KeyListener {        
@@ -51,11 +63,7 @@ public class BooksController {
                 String titulo = principal.getTitle();
             List<Books> searchResult = null;
                 System.out.println("TESTE PROCUROU enter!");
-            try {
                 searchResult = booksDao.findByTitle(titulo);
-            } catch (SQLException ex) {
-                Logger.getLogger(BooksController.class.getName()).log(Level.SEVERE, null, ex);
-            }
             
             principal.showBooks(searchResult);
             }
@@ -63,12 +71,12 @@ public class BooksController {
 
         @Override
         public void keyPressed(KeyEvent ke) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
         public void keyReleased(KeyEvent ke) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+           // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
 
@@ -141,7 +149,7 @@ public class BooksController {
         new BooksDAO().deleteBook(anISBN);
     }
     
-    public List findBooksByName(String aName) throws SQLException {
+   /* public List findBooksByName(String aName) throws SQLException {
 //        BooksDAO dao = new BooksDAO();
 //        return dao.findByTitle(aName);
 
@@ -154,6 +162,6 @@ public class BooksController {
         }
         
         return null;
-    }
+    }*/
     
 }

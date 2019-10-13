@@ -3,7 +3,7 @@ package Model;
 public class Books {
     
     public String title;
-    private String isbn;
+    public String isbn;
     private int publisherId;
     public Publishers publisher;
     private double price;
