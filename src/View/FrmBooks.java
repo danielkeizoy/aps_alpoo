@@ -1,6 +1,4 @@
-
 package View;
-
 
 import Controller.BooksController;
 import Model.Books;
@@ -35,9 +33,8 @@ import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
-
 public class FrmBooks extends JFrame {
-    
+
     JLabel lblSearchBook = new JLabel();
     JLabel lblSearchAuthor = new JLabel();
     JLabel lblSearchPublisher = new JLabel();
@@ -62,7 +59,7 @@ public class FrmBooks extends JFrame {
     JTextField txtPrice = new JTextField();
     JTextField txtPublisher = new JTextField();
     JTextField txtUrl = new JTextField();
-    JTextArea txtAuthor = new JTextArea(5,10);
+    JTextArea txtAuthor = new JTextArea(5, 10);
     DefaultTableModel dtm = new DefaultTableModel();
     JPanel panelSearch = new JPanel();//
     JMenuBar menuBar = new JMenuBar();
@@ -70,28 +67,29 @@ public class FrmBooks extends JFrame {
     JMenu menuSearch = new JMenu();
     JMenuItem menuCadastrarBook = new JMenuItem();
     JMenuItem menuCadastrarAuthor = new JMenuItem();
-    JMenuItem menuCadastrarPublisher= new JMenuItem();
+    JMenuItem menuCadastrarPublisher = new JMenuItem();
     JMenuItem menuSearchBook = new JMenuItem();
     JMenuItem menuSearhAuthor = new JMenuItem();
-    JMenuItem menuSearchPublisher= new JMenuItem();
-    
+    JMenuItem menuSearchPublisher = new JMenuItem();
+
     public static void main(String[] args) {
-        
+
         new Controller.BooksController();
-        
+
     }
-    public FrmBooks(){
-        
+
+    public FrmBooks() {
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(1024,768));
+        setPreferredSize(new Dimension(1024, 768));
         setVisible(true);
         setTitle("Livraria");
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-              
+
         //Menu
         menuCadastrar.setText("Cadastrar");
-       
+
         menuCadastrarBook.setText("Livro");
         menuCadastrar.add(menuCadastrarBook);
         menuCadastrarAuthor.setText("Autor");
@@ -110,18 +108,15 @@ public class FrmBooks extends JFrame {
         menuSearch.add(menuSearchPublisher);
 
         menuBar.add(menuSearch);
-        setJMenuBar(menuBar);    
-        
-        
-       
+        setJMenuBar(menuBar);
+
         //Painel Filtro  
-        
         JPanel panelFilter = new JPanel();
-        panelFilter.setLayout(new GridLayout(2,1));
+        panelFilter.setLayout(new GridLayout(2, 1));
         //panelFilter.setBackground(Color.yellow);
-        
+
         panelSearch.setBorder(BorderFactory.createTitledBorder("Buscar Livro"));
-        panelSearch.setLayout(new GridLayout(2,3));
+        panelSearch.setLayout(new GridLayout(2, 3));
         lblSearchBook.setText("Livro");
         lblSearchAuthor.setText("Autor");
         lblSearchPublisher.setText("Editora");
@@ -134,24 +129,21 @@ public class FrmBooks extends JFrame {
         panelFilter.add(panelSearch);
 //        panelSearch.setBackground(Color.pink);
 
-        
         JPanel panelBtn = new JPanel();
-        panelBtn.setLayout(new GridLayout(1,2,15,20));        
+        panelBtn.setLayout(new GridLayout(1, 2, 15, 20));
         btnSearch.setText("BUSCAR");
         btnClear.setText("LIMPAR");
         panelBtn.add(btnSearch);
         panelBtn.add(btnClear);
-       // panelFilter.add(panelBtn);
-        
-        
-        
+        // panelFilter.add(panelBtn);
+
         //Tabela
-        Object[] colNames = {"isbn", "title","editora"};
-        Object[][]data = new Object[0][3];
+        Object[] colNames = {"isbn", "title", "editora"};
+        Object[][] data = new Object[0][3];
         dtm = new DefaultTableModel(data, colNames);
         JTable table = new JTable(dtm);
         JScrollPane jScrollPane1 = new JScrollPane(table);
-       
+
         // Infos
         lblSegN.setText("Seq. Nº");
         lblBook.setText("Book");
@@ -163,7 +155,7 @@ public class FrmBooks extends JFrame {
         btnNew.setText("NOVO");
         btnEdit.setText("EDITAR");
         btnDelete.setText("EXCLUIR");
-        
+
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -349,8 +341,6 @@ public class FrmBooks extends JFrame {
         gbc.insets = new Insets(18, 7, 0, 50);
         add(jScrollPane2, gbc);
 
-        
-
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -359,25 +349,18 @@ public class FrmBooks extends JFrame {
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets = new Insets(7, 35, 0, 0);
         add(panelBtn, gbc);
-        
-      pack();
-      
-      
-              
-         
-     
-     
-        
-                
+
+        pack();
+
     }
-    
-    public String getTitle(){
+
+    public String getTitle() {
         return txtSearchBook.getText();
     }
-    
-    public void showBooks(List <Books> resultado){
+
+    public void showBooks(List<Books> resultado) {
         dtm.setNumRows(0);
-        for(Books book: resultado){
+        for (Books book : resultado) {
             Object[] data = new Object[3];
             data[0] = book.isbn;
             data[1] = book.title;
@@ -385,25 +368,12 @@ public class FrmBooks extends JFrame {
             dtm.addRow(data);
         }
     }
-    
+
     /*public void buscaComportamento(BooksController.ComportamentoBtnSearch comportamentoBtnSearch) {
         btnSearch.addActionListener(comportamentoBtnSearch);       
     }*/
-
     public void buscaComportamento(ActionListener al) {
-        btnSearch.addActionListener(al);       
+        btnSearch.addActionListener(al);
+        txtSearchBook.addActionListener(al);
     }
-
-    public void buscaEnter(BooksController.BotaoEnter botaoEnter) {
-        txtSearchBook.addKeyListener(botaoEnter);
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

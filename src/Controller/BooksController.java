@@ -1,4 +1,3 @@
-
 package Controller;
 
 import DAO.BooksDAO;
@@ -17,55 +16,48 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 public class BooksController {
-    
+
     FrmBooks principal;
     BooksDAO booksDao;
-    
-     public BooksController() {
+
+    public BooksController() {
         this.principal = new FrmBooks();
         this.booksDao = new BooksDAO();
-        principal.buscaComportamento(new ComportamentoBtnSearch());      
-        principal.buscaEnter(new BotaoEnter());
+        principal.buscaComportamento(new ComportamentoBtnSearch());
     }
 
-    public class ComportamentoBtnSearch implements ActionListener {       
-                
+    public class ComportamentoBtnSearch implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent ae) {
             System.out.println("TESTE PROCUROU click!");
             String titulo = principal.getTitle();
             List<Books> books;
             books = booksDao.findByTitle(titulo);
-            
-            
-            
-            
-             principal.showBooks(books);
-            
-            
+
+            principal.showBooks(books);
+
             /*
             try {
                 searchResult = booksDao.findByTitle(titulo);
             } catch (SQLException ex) {
                 Logger.getLogger(BooksController.class.getName()).log(Level.SEVERE, null, ex);
             }*/
-            
-           
         }
     }
-    public class BotaoEnter implements KeyListener {        
+
+    public class BotaoEnter implements KeyListener {
 
         @Override
         public void keyTyped(KeyEvent ke) {
-            if(ke.getKeyCode()== KeyEvent.VK_ENTER){
+            if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
                 String titulo = principal.getTitle();
-            List<Books> searchResult = null;
+                List<Books> searchResult = null;
                 System.out.println("TESTE PROCUROU enter!");
                 searchResult = booksDao.findByTitle(titulo);
-            
-            principal.showBooks(searchResult);
+
+                principal.showBooks(searchResult);
             }
         }
 
@@ -76,7 +68,7 @@ public class BooksController {
 
         @Override
         public void keyReleased(KeyEvent ke) {
-           // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
 
@@ -112,25 +104,25 @@ public class BooksController {
         }
     }
 
-    public void save(String aTitle, String anISBN, Double aPrice) throws SQLException, ParseException{
-        
+    public void save(String aTitle, String anISBN, Double aPrice) throws SQLException, ParseException {
+
         Books book = new Books();
         book.setTitle(aTitle);
         book.setIsbn(anISBN);
         book.setPrice(aPrice);
-        
+
         new BooksDAO().saveBook(book);
     }
-    
+
     public void update(String aTitle, String anISBN, Double aPrice) throws ParseException, SQLException {
-        
+
         Books book = new Books();
         book.setTitle(aTitle);
         book.setIsbn(anISBN);
         book.setPrice(aPrice);
-        
+
         new BooksDAO().updateBook(book);
-    } 
+    }
 //    
 //    public List booksList(){
 //        
@@ -144,12 +136,12 @@ public class BooksController {
 //        
 //        return null;
 //    }
-    
+
     public void delete(String anISBN) throws SQLException {
         new BooksDAO().deleteBook(anISBN);
     }
-    
-   /* public List findBooksByName(String aName) throws SQLException {
+
+    /* public List findBooksByName(String aName) throws SQLException {
 //        BooksDAO dao = new BooksDAO();
 //        return dao.findByTitle(aName);
 
@@ -163,5 +155,4 @@ public class BooksController {
         
         return null;
     }*/
-    
 }
