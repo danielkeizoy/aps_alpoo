@@ -70,7 +70,7 @@ public class BooksDAO extends DAO {
         Connection c = DBConnection.getConnection())
         {
         
-        String select = "SELECT books.isbn, books.title, publishers.name FROM books INNER JOIN publishers ON books.publisher_id = publishers.publisher_id  "
+        String select = "SELECT books.isbn, books.publisher_id, books.price, books.title, publishers.name FROM books INNER JOIN publishers ON books.publisher_id = publishers.publisher_id  "
 					+ " WHERE LOWER(books.title) LIKE LOWER(?) ";
         
         
@@ -83,10 +83,10 @@ public class BooksDAO extends DAO {
                 while (rs.next()){
                     
                     Books book = new Books();
-                    //book.setPublisherId(rs.getInt("publisher_id"));
+                    book.setPublisherId(rs.getInt("publisher_id"));
                     book.setTitle(rs.getString("title"));
                     book.setIsbn(rs.getString("isbn"));
-                    //book.setPrice(rs.getDouble("price"));
+                    book.setPrice(rs.getDouble("price"));
                     book.publisher = new Publishers();
                     book.publisher.setNamePublisher(rs.getString("name"));
                     books.add(book);

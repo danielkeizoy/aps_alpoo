@@ -140,7 +140,7 @@ public class FrmBooks extends JFrame {
         // panelFilter.add(panelBtn);
 
         //Tabela
-        Object[] colNames = {"isbn", "title", "editora"};
+        Object[] colNames = {"ISBN", "Titulo","Autor(es)", "Editora", "ID Editora", "Preço"};
         Object[][] data = new Object[0][3];
         dtm = new DefaultTableModel(data, colNames);
         table = new JTable(dtm){
@@ -150,19 +150,25 @@ public class FrmBooks extends JFrame {
             }
             
         };
-       
-        JScrollPane jScrollPane1 = new JScrollPane(table);
+        table.setAutoResizeMode( JTable.AUTO_RESIZE_OFF );
+        table.getColumnModel().getColumn(0).setPreferredWidth(100);
+        table.getColumnModel().getColumn(1).setPreferredWidth(350);
+        table.getColumnModel().getColumn(2).setPreferredWidth(100);
+        table.getColumnModel().getColumn(3).setPreferredWidth(100);
+        table.getColumnModel().getColumn(4).setPreferredWidth(100);
+        JScrollPane jScrollPane1 = new JScrollPane(table,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        table.setAutoscrolls(true);
         
         
         
         
 
         // Infos
-        lblSegN.setText("Seq. Nº");
-        lblBook.setText("Book");
+        lblSegN.setText("ID Editora");
+        lblBook.setText("Titulo");
         lblIsbn.setText("ISBN");
-        lblPrice.setText("Price");
-        lblPublisher.setText("Publisher");
+        lblPrice.setText("Preço");
+        lblPublisher.setText("Editora");
         lblUrl.setText("URL");
         lblAuthor.setText("Autor");
         btnNew.setText("NOVO");
@@ -193,7 +199,7 @@ public class FrmBooks extends JFrame {
         gbc.insets = new Insets(7, 12, 67, 0);
         add(jScrollPane1, gbc);
 
-        lblSegN.setText("Seq Nº");
+        
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
         gbc.gridy = 2;
@@ -202,7 +208,7 @@ public class FrmBooks extends JFrame {
         gbc.insets = new Insets(10, 73, 0, 0);
         add(lblSegN, gbc);
 
-        lblBook.setText("Book");
+        
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
         gbc.gridy = 4;
@@ -211,7 +217,7 @@ public class FrmBooks extends JFrame {
         gbc.insets = new Insets(21, 86, 0, 0);
         add(lblBook, gbc);
 
-        lblIsbn.setText("ISBN");
+        
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
         gbc.gridy = 6;
@@ -220,25 +226,25 @@ public class FrmBooks extends JFrame {
         gbc.insets = new Insets(21, 86, 0, 0);
         add(lblIsbn, gbc);
 
-        lblPrice.setText("Price");
+        
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
         gbc.gridy = 8;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.NORTHWEST;
-        gbc.insets = new Insets(21, 85, 0, 0);
+        gbc.insets = new Insets(21, 83, 0, 0);
         add(lblPrice, gbc);
 
-        lblPublisher.setText("Publisher");
+        
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
         gbc.gridy = 10;
         gbc.gridwidth = 2;
         gbc.anchor = GridBagConstraints.NORTHWEST;
-        gbc.insets = new Insets(21, 61, 0, 0);
+        gbc.insets = new Insets(21, 73, 0, 0);
         add(lblPublisher, gbc);
 
-        lblUrl.setText("URL");
+
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
         gbc.gridy = 12;
@@ -247,19 +253,19 @@ public class FrmBooks extends JFrame {
         gbc.insets = new Insets(21, 91, 0, 0);
         add(lblUrl, gbc);
 
-        lblAuthor.setText("Author");
+
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
         gbc.gridy = 14;
         gbc.anchor = GridBagConstraints.NORTHWEST;
-        gbc.insets = new Insets(18, 61, 0, 0);
+        gbc.insets = new Insets(18, 83, 0, 0);
         add(lblAuthor, gbc);
 
         gbc = new GridBagConstraints();
         gbc.gridx = 6;
         gbc.gridy = 2;
         gbc.gridheight = 2;
-        gbc.ipadx = 63;
+        gbc.ipadx = 120;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets = new Insets(7, 7, 0, 0);
         add(txtSeqN, gbc);
@@ -268,7 +274,7 @@ public class FrmBooks extends JFrame {
         gbc.gridx = 6;
         gbc.gridy = 4;
         gbc.gridheight = 2;
-        gbc.ipadx = 63;
+        gbc.ipadx = 200;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets = new Insets(18, 7, 0, 0);
         add(txtBook, gbc);
@@ -277,7 +283,7 @@ public class FrmBooks extends JFrame {
         gbc.gridx = 6;
         gbc.gridy = 6;
         gbc.gridheight = 2;
-        gbc.ipadx = 63;
+        gbc.ipadx = 120;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets = new Insets(18, 7, 0, 0);
         add(txtIsbn, gbc);
@@ -286,7 +292,7 @@ public class FrmBooks extends JFrame {
         gbc.gridx = 6;
         gbc.gridy = 8;
         gbc.gridheight = 2;
-        gbc.ipadx = 63;
+        gbc.ipadx = 120;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets = new Insets(18, 7, 0, 0);
         add(txtPrice, gbc);
@@ -295,7 +301,7 @@ public class FrmBooks extends JFrame {
         gbc.gridx = 6;
         gbc.gridy = 10;
         gbc.gridheight = 2;
-        gbc.ipadx = 63;
+        gbc.ipadx = 120;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets = new Insets(18, 7, 0, 0);
         add(txtPublisher, gbc);
@@ -304,7 +310,7 @@ public class FrmBooks extends JFrame {
         gbc.gridx = 6;
         gbc.gridy = 12;
         gbc.gridheight = 2;
-        gbc.ipadx = 63;
+        gbc.ipadx = 120;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets = new Insets(18, 7, 0, 0);
         add(txtUrl, gbc);
@@ -381,10 +387,13 @@ public class FrmBooks extends JFrame {
     public void showBooks(List<Books> resultado) {
         dtm.setNumRows(0);
         for (Books book : resultado) {
-            Object[] data = new Object[3];
+            Object[] data = new Object[6];
             data[0] = book.isbn;
             data[1] = book.title;
-            data[2] = book.publisher.namePublisher;
+            data[2] = book.getAuthors();
+            data[3] = book.publisher.namePublisher;
+            data[4] = book.getPublisherId();
+            data[5] = book.getPrice();
             dtm.addRow(data);
         }
     }
@@ -434,10 +443,34 @@ public class FrmBooks extends JFrame {
         String isbn = dtm.getValueAt(linhaSelecionada, 0).toString();
         return isbn;
     }
+    public String getTitleSelected()
+    {
+        int linhaSelecionada = table.getSelectedRow();
+        String title = dtm.getValueAt(linhaSelecionada, 1).toString();
+        return title;
+    }
+//    public String getAuthorSelected()
+//    {
+//        int linhaSelecionada = table.getSelectedRow();
+//        String autor = dtm.getValueAt(linhaSelecionada, 2).toString();
+//        return autor;
+//    }
+    public String getPublisherSelected()
+    {
+        int linhaSelecionada = table.getSelectedRow();
+        String editora = dtm.getValueAt(linhaSelecionada, 3).toString();
+        return editora;
+    }
     
     public void setTextBoxValues(Books book)
     {
+        txtAuthor.setText(book.authors.toString());
         txtIsbn.setText(book.isbn);
+        txtBook.setText(book.title);
+        txtBook.setCaretPosition(0);
+        txtPublisher.setText(book.publisher.namePublisher);
+        txtSeqN.setText(Integer.toString(book.publisher.getPublisherId()));
+        txtPrice.setText(Double.toString(book.getPrice()));
     }
     
     
