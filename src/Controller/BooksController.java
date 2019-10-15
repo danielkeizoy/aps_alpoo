@@ -72,17 +72,17 @@ public class BooksController {
 
         @Override
         public void keyPressed(KeyEvent ke) {
+            
+        }
+
+        @Override
+        public void keyReleased(KeyEvent ke) {
             if (ke.getKeyCode() == VK_BACK_SPACE) {
                 String titulo = principal.getTitle();
                 List<Books> books;
                 books = booksDao.findByTitle(titulo);
                 principal.showBooks(books);
             }
-        }
-
-        @Override
-        public void keyReleased(KeyEvent ke) {
-
         }
     }
 

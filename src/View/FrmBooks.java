@@ -406,9 +406,11 @@ public class FrmBooks extends JFrame {
     public void limpaComportamento(ActionListener al) {
         btnClear.addActionListener(al);
     }
+    
     public void AutoBuscaLivro(BooksController.AutoBuscaLivro autoBusca) {
         txtSearchBook.addKeyListener(autoBusca);  
-        
+    } 
+    
     public void addTableClickListener(MouseListener al){
         table.addMouseListener(al);
         /*table.addMouseListener(new MouseAdapter() {
@@ -441,9 +443,7 @@ public class FrmBooks extends JFrame {
     
     
 
-    public void AutoBusca(BooksController.AutoBusca autoBusca) {
-        txtSearchBook.addKeyListener(autoBusca);
-    }
+
     //TODO TRAB 2 - BUSCA DE AUTORES E EDITORAS
 //    public void AutoBuscaAutor(AuthorsController.AutoBuscaAutor autoBusca) {
 //        txtSearchAuthor.addKeyListener(autoBusca);  
