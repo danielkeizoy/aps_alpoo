@@ -7,7 +7,9 @@ import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import static java.awt.event.KeyEvent.VK_BACK_SPACE;
 import java.awt.event.KeyListener;
+import static java.lang.Character.isLetter;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class BooksController {
         this.principal = new FrmBooks();
         this.booksDao = new BooksDAO();
         principal.buscaComportamento(new ComportamentoBtnSearch());
+        principal.AutoBusca(new AutoBusca());
     }
 
     public class ComportamentoBtnSearch implements ActionListener {
@@ -47,82 +50,86 @@ public class BooksController {
         }
     }
 
-    public class BotaoEnter implements KeyListener {
+    public class AutoBusca implements KeyListener {
 
         @Override
         public void keyTyped(KeyEvent ke) {
-            if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (isLetter(ke.getKeyChar())) {
                 String titulo = principal.getTitle();
-                List<Books> searchResult = null;
-                System.out.println("TESTE PROCUROU enter!");
-                searchResult = booksDao.findByTitle(titulo);
+                List<Books> books;
+                books = booksDao.findByTitle(titulo);
 
-                principal.showBooks(searchResult);
+                principal.showBooks(books);
             }
         }
 
         @Override
         public void keyPressed(KeyEvent ke) {
-            //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            if (ke.getKeyCode() == VK_BACK_SPACE) {                
+                String titulo = principal.getTitle();
+                List<Books> books;
+                books = booksDao.findByTitle(titulo);
+
+                principal.showBooks(books);
+            }
         }
 
         @Override
         public void keyReleased(KeyEvent ke) {
-            // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            
         }
-    }
 
-    private class ComportamentoBtnClear implements ActionListener {
+        private class ComportamentoBtnClear implements ActionListener {
 
-        @Override
-        public void actionPerformed(ActionEvent ae) {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
 
+            }
         }
-    }
 
-    private class ComportamentoBtnNew implements ActionListener {
+        private class ComportamentoBtnNew implements ActionListener {
 
-        @Override
-        public void actionPerformed(ActionEvent ae) {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
 
+            }
         }
-    }
 
-    private class ComportamentoBtnEdit implements ActionListener {
+        private class ComportamentoBtnEdit implements ActionListener {
 
-        @Override
-        public void actionPerformed(ActionEvent ae) {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
 
+            }
         }
-    }
 
-    private class ComportamentoBtnDelete implements ActionListener {
+        private class ComportamentoBtnDelete implements ActionListener {
 
-        @Override
-        public void actionPerformed(ActionEvent ae) {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
 
+            }
         }
-    }
 
-    public void save(String aTitle, String anISBN, Double aPrice) throws SQLException, ParseException {
+        public void save(String aTitle, String anISBN, Double aPrice) throws SQLException, ParseException {
 
-        Books book = new Books();
-        book.setTitle(aTitle);
-        book.setIsbn(anISBN);
-        book.setPrice(aPrice);
+            Books book = new Books();
+            book.setTitle(aTitle);
+            book.setIsbn(anISBN);
+            book.setPrice(aPrice);
 
-        new BooksDAO().saveBook(book);
-    }
+            new BooksDAO().saveBook(book);
+        }
 
-    public void update(String aTitle, String anISBN, Double aPrice) throws ParseException, SQLException {
+        public void update(String aTitle, String anISBN, Double aPrice) throws ParseException, SQLException {
 
-        Books book = new Books();
-        book.setTitle(aTitle);
-        book.setIsbn(anISBN);
-        book.setPrice(aPrice);
+            Books book = new Books();
+            book.setTitle(aTitle);
+            book.setIsbn(anISBN);
+            book.setPrice(aPrice);
 
-        new BooksDAO().updateBook(book);
-    }
+            new BooksDAO().updateBook(book);
+        }
 //    
 //    public List booksList(){
 //        
@@ -137,11 +144,11 @@ public class BooksController {
 //        return null;
 //    }
 
-    public void delete(String anISBN) throws SQLException {
-        new BooksDAO().deleteBook(anISBN);
-    }
+        public void delete(String anISBN) throws SQLException {
+            new BooksDAO().deleteBook(anISBN);
+        }
 
-    /* public List findBooksByName(String aName) throws SQLException {
+        /* public List findBooksByName(String aName) throws SQLException {
 //        BooksDAO dao = new BooksDAO();
 //        return dao.findByTitle(aName);
 
@@ -155,4 +162,5 @@ public class BooksController {
         
         return null;
     }*/
+    }
 }
