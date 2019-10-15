@@ -363,6 +363,13 @@ public class FrmBooks extends JFrame {
     public String getTitle() {
         return txtSearchBook.getText();
     }
+    
+    public String getAuthorName() {
+        return txtSearchAuthor.getText();
+    }
+    public String getPublisherName() {
+        return txtSearchPublisher.getText();
+    }
 
     public void showBooks(List<Books> resultado) {
         dtm.setNumRows(0);
@@ -374,6 +381,12 @@ public class FrmBooks extends JFrame {
             dtm.addRow(data);
         }
     }
+    
+    public void resetFields(){
+        txtSearchBook.setText("");
+        txtSearchAuthor.setText("");
+        txtSearchPublisher.setText("");
+    }
 
     /*public void buscaComportamento(BooksController.ComportamentoBtnSearch comportamentoBtnSearch) {
         btnSearch.addActionListener(comportamentoBtnSearch);       
@@ -382,10 +395,20 @@ public class FrmBooks extends JFrame {
         btnSearch.addActionListener(al);
         txtSearchBook.addActionListener(al);
     }
-
-    public void AutoBusca(BooksController.AutoBusca autoBusca) {
-        txtSearchBook.addKeyListener(autoBusca);
+    
+    public void limpaComportamento(ActionListener al) {
+        btnClear.addActionListener(al);
     }
+    public void AutoBuscaLivro(BooksController.AutoBuscaLivro autoBusca) {
+        txtSearchBook.addKeyListener(autoBusca);  
+    }
+    //TODO TRAB 2 - BUSCA DE AUTORES E EDITORAS
+//    public void AutoBuscaAutor(AuthorsController.AutoBuscaAutor autoBusca) {
+//        txtSearchAuthor.addKeyListener(autoBusca);  
+//    }
+//    public void AutoBuscaLivro(PublishersController.AutoBuscaEditora autoBusca) {
+//        txtSearchPublisher.addKeyListener(autoBusca);  
+//    }
 
     
     
