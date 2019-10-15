@@ -61,6 +61,7 @@ public class FrmBooks extends JFrame {
     JTextField txtUrl = new JTextField();
     JTextArea txtAuthor = new JTextArea(5, 10);
     DefaultTableModel dtm = new DefaultTableModel();
+    JTable table;
     JPanel panelSearch = new JPanel();//
     JMenuBar menuBar = new JMenuBar();
     JMenu menuCadastrar = new JMenu();
@@ -71,6 +72,7 @@ public class FrmBooks extends JFrame {
     JMenuItem menuSearchBook = new JMenuItem();
     JMenuItem menuSearhAuthor = new JMenuItem();
     JMenuItem menuSearchPublisher = new JMenuItem();
+    
 
     public static void main(String[] args) {
 
@@ -141,7 +143,15 @@ public class FrmBooks extends JFrame {
         Object[] colNames = {"isbn", "title", "editora"};
         Object[][] data = new Object[0][3];
         dtm = new DefaultTableModel(data, colNames);
-        JTable table = new JTable(dtm);
+           
+        table = new JTable(dtm){
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+            
+        };
+       
         JScrollPane jScrollPane1 = new JScrollPane(table);
 
         // Infos
@@ -376,4 +386,7 @@ public class FrmBooks extends JFrame {
         btnSearch.addActionListener(al);
         txtSearchBook.addActionListener(al);
     }
+
+    
+    
 }
