@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.List;
+
 public class Books {
     
     public String title;
@@ -7,6 +9,7 @@ public class Books {
     private int publisherId;
     public Publishers publisher;
     private double price;
+    public List<Authors> authors;
 
     public String getTitle() {
         return title;
@@ -38,6 +41,16 @@ public class Books {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    
+    public List<Authors> getAuthors() {
+        return authors;
+    }
+
+    
+    public void setAuthors(List<Authors> authors) {
+        this.authors = authors;
     }
     
    

@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -25,8 +28,16 @@ public class BooksController {
         this.principal = new FrmBooks();
         this.booksDao = new BooksDAO();
         principal.buscaComportamento(new ComportamentoBtnSearch());
+        principal.addTableClickListener(new ComportamentoTableClick());
     }
 
+    
+    
+    
+    
+    
+    
+    
     public class ComportamentoBtnSearch implements ActionListener {
 
         @Override
@@ -46,6 +57,10 @@ public class BooksController {
             }*/
         }
     }
+    
+    
+    
+    
 
     public class BotaoEnter implements KeyListener {
 
@@ -101,6 +116,33 @@ public class BooksController {
         @Override
         public void actionPerformed(ActionEvent ae) {
 
+        }
+    }
+    
+    private class ComportamentoTableClick implements MouseListener{
+        @Override
+        public void mouseExited(MouseEvent me)
+        {
+        }
+        
+        @Override
+        public void mouseEntered(MouseEvent me)
+        {
+        }
+        @Override
+        public void mouseReleased(MouseEvent me)
+        {
+        }
+        @Override
+        public void mousePressed(MouseEvent me)
+        {
+        }
+        @Override
+        public void mouseClicked(MouseEvent me)
+        {
+            String a = principal.getIsbnSelected();
+            Books book = booksDao.findByIsbn(a);
+            principal.setTextBoxValues(book);
         }
     }
 

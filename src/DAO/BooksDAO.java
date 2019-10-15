@@ -1,12 +1,15 @@
 package DAO;
 
+import Model.Authors;
 import Model.Books;
 import Model.Publishers;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -99,5 +102,90 @@ public class BooksDAO extends DAO {
         
         }
         return books;
+    }
+    
+    public Books findByIsbn (String isbn){
+        
+        Books book = new Books();
+        try(
+    
+        Connection c = DBConnection.getConnection())
+        {
+        
+        String select = "SELECT books.isbn, books.title, books.price, publishers.name, publishers.url "
+                + " FROM books "
+                + " INNER JOIN publishers ON books.publisher_id = publishers.publisher_id "
+                + " WHERE books.isbn = ? ";
+        
+        // Books book = null;
+        PreparedStatement pstm = c.prepareStatement(select);
+        pstm.setString(1,isbn);
+        ResultSet rs = pstm.executeQuery();
+        
+        while (rs.next()){
+            
+            
+            //book.setPublisherId(rs.getInt("publisher_id"));
+            book.setIsbn(rs.getString("isbn"));
+            book.setTitle(rs.getString("title"));
+            
+            book.setPrice(rs.getDouble("price"));
+            book.publisher = new Publishers();
+            book.publisher.setNamePublisher(rs.getString("name"));
+            book.publisher.setUrl(rs.getString("url"));
+            List<Authors> authors = getAuthorByIsbn(isbn);
+            book.setAuthors(authors);
+            
+            
+            
+        }
+        
+        rs.close();
+        pstm.close();
+        getConnection().close();
+        }catch(SQLException e) {
+            e.printStackTrace();
+        
+        }
+        return book;
+    }
+    
+    public List<Authors> getAuthorByIsbn (String isbn){
+        
+        List<Authors> authors = new ArrayList<>();
+        try(
+    
+        Connection c = DBConnection.getConnection())
+        {
+        
+        String select = "SELECT  authors.name ||' '|| authors.fname fullName, booksauthors.seq_no "
+                + " FROM books "
+                + " INNER JOIN booksauthorS ON books.isbn = booksauthors.isbn "
+                + " INNER JOIN authors ON booksauthors.author_id = authors.author_id "
+                + " WHERE books.isbn = ? ";
+        
+        // Books book = null;
+        PreparedStatement pstm = c.prepareStatement(select);
+        pstm.setString(1, isbn);
+        ResultSet rs = pstm.executeQuery();
+        
+        while (rs.next()){
+            
+            
+            //book.setPublisherId(rs.getInt("publisher_id"));
+            Authors author = new Authors();
+            author.setNameAuthor(rs.getString("fullName"));
+            authors.add(author);
+            
+        }
+        
+        rs.close();
+        pstm.close();
+        getConnection().close();
+        }catch(SQLException e) {
+            e.printStackTrace();
+        
+        }
+        return authors;
     }
 }
