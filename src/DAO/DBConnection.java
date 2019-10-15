@@ -10,7 +10,7 @@ public class DBConnection {
     
     private static final String URL = "jdbc:postgresql:db_livraria";
     private static final String USER = "postgres";
-    private static final String PASS = "123456";
+    private static final String PASS = "postgres";
     
     public static Connection getConnection(){
         try{

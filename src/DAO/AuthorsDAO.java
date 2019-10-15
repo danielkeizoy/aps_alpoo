@@ -36,20 +36,19 @@ public class AuthorsDAO extends DAO {
         
         String select = "SELECT * FROM authors";
         
-        PreparedStatement stmt = getConnection().prepareStatement(select);
-        
-        ResultSet rs = stmt.executeQuery();
-        
-        while (rs.next()){
-            Authors author = new Authors();
-            author.setAuthorId(rs.getInt("author_id"));
-            author.setNameAuthor(rs.getString("name"));
-            author.setfNameAuthor(rs.getString("fname"));
-            authors.add(author);
+        try (PreparedStatement stmt = getConnection().prepareStatement(select)) {
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()){
+                Authors author = new Authors();
+                author.setAuthorId(rs.getInt("author_id"));
+                author.setNameAuthor(rs.getString("name"));
+                author.setfNameAuthor(rs.getString("fname"));
+                authors.add(author);
+            }
+            
+            rs.close();
         }
-        
-        rs.close();
-        stmt.close();
         getConnection().close();
         
         return authors;
@@ -59,22 +58,21 @@ public class AuthorsDAO extends DAO {
         
         String select = "SELECT * FROM authors WHERE name = ?";
         Authors author = null;
-        PreparedStatement stmt = getConnection().prepareStatement(select);
-        
-        stmt.setString(1, aName);
-        
-        ResultSet rs = stmt.executeQuery();
-        
-        while (rs.next()){
-            author = new Authors();
-            author.setAuthorId(rs.getInt("author_id"));
-            author.setNameAuthor(rs.getString("name"));
-            author.setfNameAuthor(rs.getString("fname"));
+        try (PreparedStatement stmt = getConnection().prepareStatement(select)) {
+            stmt.setString(1, aName);
             
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()){
+                author = new Authors();
+                author.setAuthorId(rs.getInt("author_id"));
+                author.setNameAuthor(rs.getString("name"));
+                author.setfNameAuthor(rs.getString("fname"));
+                
+            }
+            
+            rs.close();
         }
-        
-        rs.close();
-        stmt.close();
         getConnection().close();
         
         return author;

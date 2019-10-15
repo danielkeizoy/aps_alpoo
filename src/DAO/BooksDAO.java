@@ -74,28 +74,27 @@ public class BooksDAO extends DAO {
 					+ " WHERE LOWER(books.title) LIKE LOWER(?) ";
         
         
-        // Books book = null;
-        PreparedStatement pstm = c.prepareStatement(select);
-        
-        pstm.setString(1, "%" + aTitle + "%");
-        
-        ResultSet rs = pstm.executeQuery();
-        
-        while (rs.next()){
-            
-            Books book = new Books();
-            //book.setPublisherId(rs.getInt("publisher_id"));
-            book.setTitle(rs.getString("title"));
-            book.setIsbn(rs.getString("isbn"));
-            //book.setPrice(rs.getDouble("price"));
-            book.publisher = new Publishers();
-            book.publisher.setNamePublisher(rs.getString("name"));
-            books.add(book);
-            
-        }
-        
-        rs.close();
-        pstm.close();
+            try ( // Books book = null;
+                    PreparedStatement pstm = c.prepareStatement(select)) {
+                pstm.setString(1, "%" + aTitle + "%");
+                
+                ResultSet rs = pstm.executeQuery();
+                
+                while (rs.next()){
+                    
+                    Books book = new Books();
+                    //book.setPublisherId(rs.getInt("publisher_id"));
+                    book.setTitle(rs.getString("title"));
+                    book.setIsbn(rs.getString("isbn"));
+                    //book.setPrice(rs.getDouble("price"));
+                    book.publisher = new Publishers();
+                    book.publisher.setNamePublisher(rs.getString("name"));
+                    books.add(book);
+                    
+                }
+                
+                rs.close();
+            }
         getConnection().close();
         }catch(SQLException e) {
             e.printStackTrace();

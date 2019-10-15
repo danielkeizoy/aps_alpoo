@@ -38,7 +38,7 @@ import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 
 public class FrmBooks extends JFrame {
-
+    
     JLabel lblSearchBook = new JLabel();
     JLabel lblSearchAuthor = new JLabel();
     JLabel lblSearchPublisher = new JLabel();
@@ -78,11 +78,7 @@ public class FrmBooks extends JFrame {
     JMenuItem menuSearchPublisher = new JMenuItem();
     
 
-    public static void main(String[] args) {
-
-        new Controller.BooksController();
-
-    }
+    
 
     public FrmBooks() {
 
@@ -425,6 +421,10 @@ public class FrmBooks extends JFrame {
     
     
     
+
+    public void AutoBusca(BooksController.AutoBusca autoBusca) {
+        txtSearchBook.addKeyListener(autoBusca);
+    }
 
     
     
