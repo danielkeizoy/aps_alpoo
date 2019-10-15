@@ -11,6 +11,10 @@ import java.awt.Insets;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.print.Book;
 import java.util.HashSet;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -139,7 +143,6 @@ public class FrmBooks extends JFrame {
         Object[] colNames = {"isbn", "title", "editora"};
         Object[][] data = new Object[0][3];
         dtm = new DefaultTableModel(data, colNames);
-           
         table = new JTable(dtm){
             @Override
             public boolean isCellEditable(int row, int column){
@@ -149,6 +152,10 @@ public class FrmBooks extends JFrame {
         };
        
         JScrollPane jScrollPane1 = new JScrollPane(table);
+        
+        
+        
+        
 
         // Infos
         lblSegN.setText("Seq. Nº");
@@ -401,6 +408,41 @@ public class FrmBooks extends JFrame {
     }
     public void AutoBuscaLivro(BooksController.AutoBuscaLivro autoBusca) {
         txtSearchBook.addKeyListener(autoBusca);  
+        
+    public void addTableClickListener(MouseListener al){
+        table.addMouseListener(al);
+        /*table.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e){
+                int row = table.rowAtPoint(e.getPoint());
+                int col = table.columnAtPoint(e.getPoint());
+                //getBookSelecionado();
+                
+            }
+        });*/
+        //int linhaSelecionada = table.getSelectedRow();
+        //String isbn = dtm.getValueAt(linhaSelecionada, 0).toString();
+        
+                
+       
+    }
+    
+    public String getIsbnSelected()
+    {
+        int linhaSelecionada = table.getSelectedRow();
+        String isbn = dtm.getValueAt(linhaSelecionada, 0).toString();
+        return isbn;
+    }
+    
+    public void setTextBoxValues(Books book)
+    {
+        txtIsbn.setText(book.isbn);
+    }
+    
+    
+    
+
+    public void AutoBusca(BooksController.AutoBusca autoBusca) {
+        txtSearchBook.addKeyListener(autoBusca);
     }
     //TODO TRAB 2 - BUSCA DE AUTORES E EDITORAS
 //    public void AutoBuscaAutor(AuthorsController.AutoBuscaAutor autoBusca) {

@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import static java.awt.event.KeyEvent.VK_BACK_SPACE;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import static java.lang.Character.isLetter;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -28,8 +31,9 @@ public class BooksController {
         principal.buscaComportamento(new ComportamentoBtnSearch());
         principal.limpaComportamento(new ComportamentoBtnClear());
         principal.AutoBuscaLivro(new AutoBuscaLivro());
+        principal.addTableClickListener(new ComportamentoTableClick());
     }
-
+  
     public class ComportamentoBtnSearch implements ActionListener {
 
         @Override
@@ -49,7 +53,7 @@ public class BooksController {
             }*/
         }
     }
-
+    
     public class AutoBuscaLivro implements KeyListener {
 
         @Override
@@ -117,7 +121,34 @@ public class BooksController {
 
         }
     }
-
+    
+    private class ComportamentoTableClick implements MouseListener{
+        @Override
+        public void mouseExited(MouseEvent me)
+        {
+        }
+        
+        @Override
+        public void mouseEntered(MouseEvent me)
+        {
+        }
+        @Override
+        public void mouseReleased(MouseEvent me)
+        {
+        }
+        @Override
+        public void mousePressed(MouseEvent me)
+        {
+        }
+        @Override
+        public void mouseClicked(MouseEvent me)
+        {
+            String a = principal.getIsbnSelected();
+            Books book = booksDao.findByIsbn(a);
+            principal.setTextBoxValues(book);
+        }
+    }
+    
     public void save(String aTitle, String anISBN, Double aPrice) throws SQLException, ParseException {
 
         Books book = new Books();
@@ -169,15 +200,4 @@ public class BooksController {
         
         return null;
     }*/
-    public static <Books> List<Books> buscaSemDuplicatas(List<Books> aBooks) {
-        List<Books> newBooks = null;
-        for (Books element : aBooks) {
-            if (!newBooks.contains(element)) {
-                newBooks.add(element);
-            }
-        }
-
-        return newBooks;
-    }
-
 }

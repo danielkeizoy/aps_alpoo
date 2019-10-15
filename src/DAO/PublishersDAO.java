@@ -37,20 +37,19 @@ public class PublishersDAO extends DAO {
         
         String select = "SELECT * FROM publisher";
         
-        PreparedStatement stmt = getConnection().prepareStatement(select);
-        
-        ResultSet rs = stmt.executeQuery();
-        
-        while (rs.next()){
-            Publishers publisher = new Publishers();
-            publisher.setPublisherId(rs.getInt("publisher_id"));
-            publisher.setNamePublisher(rs.getString("name"));
-            publisher.setUrl(rs.getString("url"));
-            publishers.add(publisher);
+        try (PreparedStatement stmt = getConnection().prepareStatement(select)) {
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()){
+                Publishers publisher = new Publishers();
+                publisher.setPublisherId(rs.getInt("publisher_id"));
+                publisher.setNamePublisher(rs.getString("name"));
+                publisher.setUrl(rs.getString("url"));
+                publishers.add(publisher);
+            }
+            
+            rs.close();
         }
-        
-        rs.close();
-        stmt.close();
         getConnection().close();
         
         return publishers;
@@ -60,22 +59,21 @@ public class PublishersDAO extends DAO {
         
         String select = "SELECT * FROM publishers WHERE name = ?";
         Publishers publisher = null;
-        PreparedStatement stmt = getConnection().prepareStatement(select);
-        
-        stmt.setString(1, aPublisher);
-        
-        ResultSet rs = stmt.executeQuery();
-        
-        while (rs.next()){
-            publisher = new Publishers();
-            publisher.setPublisherId(rs.getInt("publisher_id"));
-            publisher.setNamePublisher(rs.getString("name"));
-            publisher.setUrl(rs.getString("url"));
+        try (PreparedStatement stmt = getConnection().prepareStatement(select)) {
+            stmt.setString(1, aPublisher);
             
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()){
+                publisher = new Publishers();
+                publisher.setPublisherId(rs.getInt("publisher_id"));
+                publisher.setNamePublisher(rs.getString("name"));
+                publisher.setUrl(rs.getString("url"));
+                
+            }
+            
+            rs.close();
         }
-        
-        rs.close();
-        stmt.close();
         getConnection().close();
         
         return publisher;
