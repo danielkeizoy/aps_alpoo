@@ -140,8 +140,8 @@ public class FrmBooks extends JFrame {
         // panelFilter.add(panelBtn);
 
         //Tabela
-        Object[] colNames = {"ISBN", "Titulo","Autor(es)", "Editora", "ID Editora", "Preço"};
-        Object[][] data = new Object[0][3];
+        Object[] colNames = {"ISBN", "Titulo","Editora"};
+        Object[][] data = new Object[0][2];
         dtm = new DefaultTableModel(data, colNames);
         table = new JTable(dtm){
             @Override
@@ -153,9 +153,7 @@ public class FrmBooks extends JFrame {
         table.setAutoResizeMode( JTable.AUTO_RESIZE_OFF );
         table.getColumnModel().getColumn(0).setPreferredWidth(100);
         table.getColumnModel().getColumn(1).setPreferredWidth(350);
-        table.getColumnModel().getColumn(2).setPreferredWidth(100);
-        table.getColumnModel().getColumn(3).setPreferredWidth(100);
-        table.getColumnModel().getColumn(4).setPreferredWidth(100);
+        table.getColumnModel().getColumn(2).setPreferredWidth(152);
         JScrollPane jScrollPane1 = new JScrollPane(table,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         table.setAutoscrolls(true);
         
@@ -387,13 +385,10 @@ public class FrmBooks extends JFrame {
     public void showBooks(List<Books> resultado) {
         dtm.setNumRows(0);
         for (Books book : resultado) {
-            Object[] data = new Object[6];
+            Object[] data = new Object[3];
             data[0] = book.isbn;
             data[1] = book.title;
-            data[2] = book.getAuthors();
-            data[3] = book.publisher.namePublisher;
-            data[4] = book.getPublisherId();
-            data[5] = book.getPrice();
+            data[2] = book.publisher.namePublisher;
             dtm.addRow(data);
         }
     }
@@ -443,28 +438,10 @@ public class FrmBooks extends JFrame {
         String isbn = dtm.getValueAt(linhaSelecionada, 0).toString();
         return isbn;
     }
-    public String getTitleSelected()
-    {
-        int linhaSelecionada = table.getSelectedRow();
-        String title = dtm.getValueAt(linhaSelecionada, 1).toString();
-        return title;
-    }
-//    public String getAuthorSelected()
-//    {
-//        int linhaSelecionada = table.getSelectedRow();
-//        String autor = dtm.getValueAt(linhaSelecionada, 2).toString();
-//        return autor;
-//    }
-    public String getPublisherSelected()
-    {
-        int linhaSelecionada = table.getSelectedRow();
-        String editora = dtm.getValueAt(linhaSelecionada, 3).toString();
-        return editora;
-    }
     
     public void setTextBoxValues(Books book)
     {
-        txtAuthor.setText(book.authors.toString());
+        txtAuthor.setText(book.autores(book.authors));
         txtIsbn.setText(book.isbn);
         txtBook.setText(book.title);
         txtBook.setCaretPosition(0);

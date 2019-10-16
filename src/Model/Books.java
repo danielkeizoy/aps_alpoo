@@ -1,6 +1,7 @@
 package Model;
 
 import java.util.List;
+import Model.Authors;
 
 public class Books {
     
@@ -52,7 +53,17 @@ public class Books {
     public void setAuthors(List<Authors> authors) {
         this.authors = authors;
     }
-    
+//    @Override
+    public String autores(List<Authors> authors){
+        String toString = "";
+        //para pular linha em linux eh \n, mas em windows eh \r\n
+        String enter = System.getProperty("line.separator");
+        for(Authors autores: authors){
+            toString += autores.getNameAuthor();
+            toString += " " + enter;
+        }
+        return toString;
+    }
    
     
 }
