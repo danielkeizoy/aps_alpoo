@@ -446,8 +446,12 @@ public class FrmBooks extends JFrame {
         txtBook.setText(book.title);
         txtBook.setCaretPosition(0);
         txtPublisher.setText(book.publisher.namePublisher);
+        txtPublisher.setCaretPosition(0);
         txtSeqN.setText(Integer.toString(book.publisher.getPublisherId()));
+        System.out.println(book.publisher.getPublisherId());
         txtPrice.setText(Double.toString(book.getPrice()));
+        txtUrl.setText(book.publisher.getUrl());
+        txtUrl.setCaretPosition(0);
     }
     
     

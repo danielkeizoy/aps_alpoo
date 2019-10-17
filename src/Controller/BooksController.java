@@ -38,7 +38,7 @@ public class BooksController {
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-            System.out.println("TESTE PROCUROU click!");
+           
             String titulo = principal.getTitle();
             List<Books> books;
             books = booksDao.findByTitle(titulo);
