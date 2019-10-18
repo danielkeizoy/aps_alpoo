@@ -58,16 +58,7 @@ public class BooksController {
 
         @Override
         public void keyTyped(KeyEvent ke) {
-            if (isLetter(ke.getKeyChar())) {
-                String titulo = principal.getTitle();
-                String autor = principal.getAuthorName();
-                String publisher = principal.getPublisherName();
 
-                List<Books> books;
-                books = booksDao.findByTitle(titulo);
-
-                principal.showBooks(books);
-            }
         }
 
         @Override
@@ -83,6 +74,17 @@ public class BooksController {
                 books = booksDao.findByTitle(titulo);
                 principal.showBooks(books);
             }
+                        if (isLetter(ke.getKeyChar())) {
+                String titulo = principal.getTitle();
+                String autor = principal.getAuthorName();
+                String publisher = principal.getPublisherName();
+
+                List<Books> books;
+                books = booksDao.findByTitle(titulo);
+
+                principal.showBooks(books);
+            }
+
         }
     }
 

@@ -49,21 +49,25 @@ public class FrmBooks extends JFrame {
     JLabel lblPublisher = new JLabel();
     JLabel lblUrl = new JLabel();
     JLabel lblAuthor = new JLabel();
-    JButton btnSearch = new JButton();
+    
+    JButton btnSearchBook = new JButton();
+    JButton btnSearchAuthor = new JButton();
+    JButton btnSearchPublisher = new JButton();
     JButton btnClear = new JButton();
     JButton btnNew = new JButton();
     JButton btnEdit = new JButton();
     JButton btnDelete = new JButton();
+    
     JTextField txtSearchBook = new JTextField();
     JTextField txtSearchAuthor = new JTextField();
     JTextField txtSearchPublisher = new JTextField();
-    JTextField txtSeqN = new JTextField();
     JTextField txtBook = new JTextField();
     JTextField txtIsbn = new JTextField();
     JTextField txtPrice = new JTextField();
     JTextField txtPublisher = new JTextField();
-    JTextField txtUrl = new JTextField();
+    JTextField txtUrl = new JTextField();    
     JTextArea txtAuthor = new JTextArea(5, 10);
+    
     DefaultTableModel dtm = new DefaultTableModel();
     JTable table;
     JPanel panelSearch = new JPanel();//
@@ -133,9 +137,9 @@ public class FrmBooks extends JFrame {
 
         JPanel panelBtn = new JPanel();
         panelBtn.setLayout(new GridLayout(1, 2, 15, 20));
-        btnSearch.setText("BUSCAR");
+        btnSearchBook.setText("BUSCAR");
         btnClear.setText("LIMPAR");
-        panelBtn.add(btnSearch);
+        panelBtn.add(btnSearchBook);
         panelBtn.add(btnClear);
         // panelFilter.add(panelBtn);
 
@@ -150,7 +154,7 @@ public class FrmBooks extends JFrame {
             }
             
         };
-        table.setAutoResizeMode( JTable.AUTO_RESIZE_OFF );
+//        table.setAutoResizeMode( JTable.AUTO_RESIZE_OFF );
         table.getColumnModel().getColumn(0).setPreferredWidth(100);
         table.getColumnModel().getColumn(1).setPreferredWidth(350);
         table.getColumnModel().getColumn(2).setPreferredWidth(152);
@@ -162,7 +166,6 @@ public class FrmBooks extends JFrame {
         
 
         // Infos
-        lblSegN.setText("ID Editora");
         lblBook.setText("Titulo");
         lblIsbn.setText("ISBN");
         lblPrice.setText("Preço");
@@ -261,20 +264,12 @@ public class FrmBooks extends JFrame {
 
         gbc = new GridBagConstraints();
         gbc.gridx = 6;
-        gbc.gridy = 2;
-        gbc.gridheight = 2;
-        gbc.ipadx = 120;
-        gbc.anchor = GridBagConstraints.NORTHWEST;
-        gbc.insets = new Insets(7, 7, 0, 0);
-        add(txtSeqN, gbc);
-
-        gbc = new GridBagConstraints();
-        gbc.gridx = 6;
         gbc.gridy = 4;
         gbc.gridheight = 2;
         gbc.ipadx = 200;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets = new Insets(18, 7, 0, 0);
+        txtBook.setEditable(false);
         add(txtBook, gbc);
 
         gbc = new GridBagConstraints();
@@ -284,6 +279,7 @@ public class FrmBooks extends JFrame {
         gbc.ipadx = 120;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets = new Insets(18, 7, 0, 0);
+        txtIsbn.setEditable(false);
         add(txtIsbn, gbc);
 
         gbc = new GridBagConstraints();
@@ -293,6 +289,7 @@ public class FrmBooks extends JFrame {
         gbc.ipadx = 120;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets = new Insets(18, 7, 0, 0);
+        txtPrice.setEditable(false);
         add(txtPrice, gbc);
 
         gbc = new GridBagConstraints();
@@ -302,6 +299,7 @@ public class FrmBooks extends JFrame {
         gbc.ipadx = 120;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets = new Insets(18, 7, 0, 0);
+        txtPublisher.setEditable(false);
         add(txtPublisher, gbc);
 
         gbc = new GridBagConstraints();
@@ -311,6 +309,7 @@ public class FrmBooks extends JFrame {
         gbc.ipadx = 120;
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets = new Insets(18, 7, 0, 0);
+        txtUrl.setEditable(false);
         add(txtUrl, gbc);
 
         btnNew.setText("NOVO");
@@ -338,10 +337,11 @@ public class FrmBooks extends JFrame {
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.insets = new Insets(16, 18, 67, 0);
         add(btnDelete, gbc);
-
-        JScrollPane jScrollPane2 = new JScrollPane();
+                
+        JScrollPane jScrollPane2 = new JScrollPane(txtAuthor);
+        txtAuthor.setEditable(false);
         txtAuthor.setColumns(1);
-        txtAuthor.setRows(10);
+        txtAuthor.setRows(5);
         jScrollPane2.setViewportView(txtAuthor);
 
         gbc = new GridBagConstraints();
@@ -355,7 +355,7 @@ public class FrmBooks extends JFrame {
         gbc.anchor = GridBagConstraints.NORTHWEST;
         gbc.weightx = 1.0;
         gbc.weighty = 1.0;
-        gbc.insets = new Insets(18, 7, 0, 50);
+        gbc.insets = new Insets(18, 7, 200, 50);
         add(jScrollPane2, gbc);
 
         gbc = new GridBagConstraints();
@@ -400,10 +400,10 @@ public class FrmBooks extends JFrame {
     }
 
     /*public void buscaComportamento(BooksController.ComportamentoBtnSearch comportamentoBtnSearch) {
-        btnSearch.addActionListener(comportamentoBtnSearch);       
+        btnSearchBook.addActionListener(comportamentoBtnSearch);       
     }*/
     public void buscaComportamento(ActionListener al) {
-        btnSearch.addActionListener(al);
+        btnSearchBook.addActionListener(al);
         txtSearchBook.addActionListener(al);
     }
     
@@ -447,7 +447,6 @@ public class FrmBooks extends JFrame {
         txtBook.setCaretPosition(0);
         txtPublisher.setText(book.publisher.namePublisher);
         txtPublisher.setCaretPosition(0);
-        txtSeqN.setText(Integer.toString(book.publisher.getPublisherId()));
         System.out.println(book.publisher.getPublisherId());
         txtPrice.setText(Double.toString(book.getPrice()));
         txtUrl.setText(book.publisher.getUrl());
@@ -466,6 +465,6 @@ public class FrmBooks extends JFrame {
 //        txtSearchPublisher.addKeyListener(autoBusca);  
 //    }
 
-    
+        
     
 }
